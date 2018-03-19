@@ -3,8 +3,13 @@ package com.dexter.tourist;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,14 +26,20 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnChangePassword, btnRemoveUser,
-            changePassword, remove, signOut;
+    private Button btnChangePassword,
+            changePassword;
     private TextView email;
 
     private EditText oldEmail, password, newPassword;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
 
+    private Toolbar mToolbar;
+
+    private ViewPager mViewPager;
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+
+    private TabLayout mTabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +49,21 @@ public class MainActivity extends AppCompatActivity {
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
         email = (TextView) findViewById(R.id.useremail);
+
+        mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Tourist App");
+
+
+        //Tabs
+        mViewPager = (ViewPager) findViewById(R.id.main_tabPager);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        mTabLayout = (TabLayout) findViewById(R.id.main_tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
+
 
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -66,12 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnChangePassword = (Button) findViewById(R.id.change_password_button);
 
-        btnRemoveUser = (Button) findViewById(R.id.remove_user_button);
-
         changePassword = (Button) findViewById(R.id.changePass);
-
-        remove = (Button) findViewById(R.id.remove);
-        signOut = (Button) findViewById(R.id.sign_out);
 
         oldEmail = (EditText) findViewById(R.id.old_email);
 
@@ -85,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
 
         changePassword.setVisibility(View.GONE);
 
-        remove.setVisibility(View.GONE);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -104,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
 
                 changePassword.setVisibility(View.VISIBLE);
 
-                remove.setVisibility(View.GONE);
             }
         });
 
@@ -136,38 +155,6 @@ public class MainActivity extends AppCompatActivity {
                     newPassword.setError("Enter password");
                     progressBar.setVisibility(View.GONE);
                 }
-            }
-        });
-
-
-        btnRemoveUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                if (user != null) {
-                    user.delete()
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(MainActivity.this, "Your profile is deleted:( Create a account now!", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(MainActivity.this, SignupActivity.class));
-                                        finish();
-                                        progressBar.setVisibility(View.GONE);
-                                    } else {
-                                        Toast.makeText(MainActivity.this, "Failed to delete your account!", Toast.LENGTH_SHORT).show();
-                                        progressBar.setVisibility(View.GONE);
-                                    }
-                                }
-                            });
-                }
-            }
-        });
-
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
             }
         });
 
@@ -238,6 +225,67 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         if (authListener != null) {
             auth.removeAuthStateListener(authListener);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+        if (item.getItemId()==R.id.change_password_btn){
+            // TODO(1) Implement this
+            Toast.makeText(MainActivity.this,"Implement This",Toast.LENGTH_SHORT).show();
+
+        }
+        if (item.getItemId() == R.id.delete_btn){
+            deleteuser(user);
+        }
+        if(item.getItemId() == R.id.logout_btn){
+            signout();
+
+        }
+        return true;
+    }
+
+    private void signout() {
+
+        FirebaseAuth.getInstance().signOut();
+        Intent loginIntent=new Intent(MainActivity.this,LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(loginIntent);
+    }
+
+    private void deleteuser(FirebaseUser user) {
+        progressBar.setVisibility(View.VISIBLE);
+        if (user != null) {
+            user.delete()
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(MainActivity.this, "Your profile is deleted:( Create a account now!", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, SignupActivity.class));
+                                finish();
+                                progressBar.setVisibility(View.GONE);
+                            } else {
+                                Toast.makeText(MainActivity.this, "Failed to delete your account!", Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        }
+                    });
         }
     }
 }
