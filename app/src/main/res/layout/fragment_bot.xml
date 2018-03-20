@@ -4,22 +4,13 @@
     android:layout_height="match_parent"
     tools:context="com.dexter.tourist.MainTab.BotFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
-        <!--android:paddingTop="@dimen/activity_vertical_margin">-->
-        <!--android:paddingBottom=""-->
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
         <LinearLayout
-            android:id="@+id/top_container"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <Spinner
@@ -29,67 +20,67 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/eventsCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <Spinner
+                    android:id="@+id/selectEventSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></Spinner>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/textQuery"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@android:color/white" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/buttonListen"
+                    android:id="@+id/buttonSend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Listen" />
+                    android:layout_alignParentRight="true"
+                    android:text="Send" />
 
                 <Button
-                    android:id="@+id/buttonStopListen"
+                    android:id="@+id/buttonClear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="stopRecognition"
-                    android:text="StopListen" />
+                    android:layout_toLeftOf="@+id/buttonSend"
+                    android:text="clear" />
 
-                <Button
-                    android:id="@+id/buttonCancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="cancelRecognition"
-                    android:text="Cancel" />
+            </RelativeLayout>
 
-            </LinearLayout>
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleHorizontal"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:max="100"
-                android:progress="50" />
+                android:orientation="vertical">
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/resultTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/contextEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:hint="add Context here"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                    <TextView
-                        android:id="@+id/resultTextView"
-                        android:text="Result"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <EditText
-                        android:id="@+id/contextEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="add Context here"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-                </LinearLayout>
-            </ScrollView>
-
+            </LinearLayout>
         </LinearLayout>
-
-    </RelativeLayout>
+    </ScrollView>
 
 
 </FrameLayout>
