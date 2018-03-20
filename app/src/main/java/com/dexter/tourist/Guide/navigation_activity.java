@@ -2,28 +2,31 @@ package com.dexter.tourist.Guide;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.dexter.tourist.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class navigation_activity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -81,20 +84,51 @@ public class navigation_activity extends AppCompatActivity implements OnMapReady
                 return;
             }
 
+
+
+
         }
 
         mGoogleMap.setMyLocationEnabled(true);
+        LocationManager locman = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        Location location = locman .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        double lng = location.getLongitude();
+        double lat = location.getLatitude();
+        MarkerOptions options = new MarkerOptions()
+                .title("I am Here!")
+                .position(new LatLng (lat,lng))
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+        mGoogleMap.addMarker(options);
+        mGoogleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker)
+            {
+
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                View v = getLayoutInflater().inflate(R.layout.info_window,null);
+                ImageView img = findViewById(R.id.image1);
+                return v;
+            }
+
+        });
 
 
     }
 
-    private void goToLocation(double lat, double lng) {
+    private void goToLocationZoom(double lat, double lng) {
 
         LatLng ll = new LatLng(lat,lng);
         CameraUpdate update = CameraUpdateFactory.newLatLng(ll);
         mGoogleMap.moveCamera(update);
 
-    }
+
+
+
+        }
 
 
 }
