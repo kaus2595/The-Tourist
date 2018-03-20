@@ -89,48 +89,60 @@ public class navigation_activity extends AppCompatActivity implements OnMapReady
 
 
         MarkerOptions options = new MarkerOptions()
-                                  .title("Marker1")
-                                  .position(new LatLng(26.9239,75.8267));
-                                 // .snippet("Helo");
+                .title("Marker1")
+                .position(new LatLng(26.9239, 75.8267));
+        // .snippet("Helo");
 
         mGoogleMap.addMarker(options);
 
         MarkerOptions options2 = new MarkerOptions()
-                                     .title("Marker2")
-                                     .position(new LatLng(26.9241,75.8267));
-                                        //.snippet("Hi");
+                .title("Marker2")
+                .position(new LatLng(26.9241, 75.8267));
+        //.snippet("Hi");
 
         mGoogleMap.addMarker(options2);
 
         MarkerOptions options3 = new MarkerOptions()
                 .title("Marker3")
-                .position(new LatLng(26.9243,75.8267));
+                .position(new LatLng(26.9243, 75.8267));
 
         mGoogleMap.addMarker(options3);
         MarkerOptions options4 = new MarkerOptions()
                 .title("Marker4")
-                .position(new LatLng(26.9245,75.8267));
+                .position(new LatLng(26.9245, 75.8267));
 
         mGoogleMap.addMarker(options4);
         MarkerOptions options5 = new MarkerOptions()
                 .title("Marker4")
-                .position(new LatLng(26.9245,75.8267));
+                .position(new LatLng(26.9245, 75.8267));
 
         mGoogleMap.addMarker(options5);
 
+        mGoogleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                View v = getLayoutInflater().inflate(R.layout.info_window, null);
+                ImageView i = findViewById(R.id.image1);
+
+                return v;
+            }
+
+            private void goToLocationZoom(double lat, double lng) {
+
+                LatLng ll = new LatLng(lat, lng);
+                CameraUpdate update = CameraUpdateFactory.newLatLng(ll);
+                mGoogleMap.moveCamera(update);
+
+
+            }
+
+
+        });
     }
-
-    private void goToLocationZoom(double lat, double lng) {
-
-        LatLng ll = new LatLng(lat,lng);
-        CameraUpdate update = CameraUpdateFactory.newLatLng(ll);
-        mGoogleMap.moveCamera(update);
-
-
-
-
-    }
-
-
 }
