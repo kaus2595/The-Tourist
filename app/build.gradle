@@ -40,6 +40,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3'
     compile 'commons-io:commons-io:2.4'
     compile 'com.github.karanchuri:PermissionManager:0.1.0'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
