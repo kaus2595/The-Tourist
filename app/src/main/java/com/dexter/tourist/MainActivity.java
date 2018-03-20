@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.karan.churi.PermissionManager.PermissionManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,11 +38,16 @@ public class MainActivity extends AppCompatActivity {
 
     private TabLayout mTabLayout;
 
+    private PermissionManager permission;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        permission=new PermissionManager() {};
+        permission.checkAndRequestPermissions(this);
+        permission.checkAndRequestPermissions(this);
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
@@ -117,6 +123,16 @@ public class MainActivity extends AppCompatActivity {
         if (authListener != null) {
             auth.removeAuthStateListener(authListener);
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+        try{
+            permission.checkResult(requestCode,permissions, grantResults);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override
