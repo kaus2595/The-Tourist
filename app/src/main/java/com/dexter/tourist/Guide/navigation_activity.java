@@ -114,7 +114,9 @@ public class navigation_activity extends AppCompatActivity implements OnMapReady
                                   .position(new LatLng(26.9239,75.8267));
                                  // .snippet("Helo");
 
+
         mGoogleMap.addMarker(options);
+
 
         MarkerOptions options2 = new MarkerOptions()
                                      .title("Marker2")
@@ -139,8 +141,52 @@ public class navigation_activity extends AppCompatActivity implements OnMapReady
 
         mGoogleMap.addMarker(options5);
 
+        MarkerOptions options6 = new MarkerOptions()
+                .title("Marker4")
+                .position(new LatLng(26.9245,75.8268));
 
-    }
+        mGoogleMap.addMarker(options6);
+
+        MarkerOptions options7 = new MarkerOptions()
+                .title("Marker4")
+                .position(new LatLng(26.9245,75.8269));
+
+        mGoogleMap.addMarker(options7);
+        MarkerOptions options8 = new MarkerOptions()
+                .title("Marker4")
+                .position(new LatLng(26.9240,75.8269));
+
+        mGoogleMap.addMarker(options8);
+        MarkerOptions options9 = new MarkerOptions()
+                .title("Marker4")
+                .position(new LatLng(26.9236,75.8265));
+
+        mGoogleMap.addMarker(options9);
+        MarkerOptions options10 = new MarkerOptions()
+                .title("Marker4")
+                .position(new LatLng(26.9233,75.8264));
+
+        mGoogleMap.addMarker(options10);
+
+
+
+
+        mGoogleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter(){
+
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                View v = getLayoutInflater().inflate(R.layout.info_window, null);
+                ImageView i = findViewById(R.id.image1);
+                return v;
+
+
+
+            }
 
     private void goToLocationZoom(double lat, double lng) {
 
@@ -154,4 +200,4 @@ public class navigation_activity extends AppCompatActivity implements OnMapReady
     }
 
 
-}
+});}}
