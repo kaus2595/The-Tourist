@@ -89,10 +89,9 @@ public class navigation_activity extends AppCompatActivity implements OnMapReady
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-          mGoogleMap = googleMap;
+        mGoogleMap = googleMap;
         //goToLocation(39.008224,-76.8984527);
-        if(Build.VERSION.SDK_INT >=  Build.VERSION_CODES.M)
-        {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
@@ -105,36 +104,40 @@ public class navigation_activity extends AppCompatActivity implements OnMapReady
             }
 
 
-
-
         }
 
         mGoogleMap.setMyLocationEnabled(true);
-        LocationManager locman = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        Location location = locman .getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        double lng = location.getLongitude();
-        double lat = location.getLatitude();
+
+
         MarkerOptions options = new MarkerOptions()
-                .title("I am Here!")
-                .position(new LatLng (lat,lng))
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+                                  .title("Marker1")
+                                  .position(new LatLng(26.9239,75.8267));
+                                 // .snippet("Helo");
+
         mGoogleMap.addMarker(options);
-        mGoogleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-            @Override
-            public View getInfoWindow(Marker marker)
-            {
 
-                return null;
-            }
+        MarkerOptions options2 = new MarkerOptions()
+                                     .title("Marker2")
+                                     .position(new LatLng(26.9241,75.8267));
+                                        //.snippet("Hi");
 
-            @Override
-            public View getInfoContents(Marker marker) {
-                View v = getLayoutInflater().inflate(R.layout.info_window,null);
-                ImageView img = findViewById(R.id.image1);
-                return v;
-            }
+        mGoogleMap.addMarker(options2);
 
-        });
+        MarkerOptions options3 = new MarkerOptions()
+                .title("Marker3")
+                .position(new LatLng(26.9243,75.8267));
+
+        mGoogleMap.addMarker(options3);
+        MarkerOptions options4 = new MarkerOptions()
+                .title("Marker4")
+                .position(new LatLng(26.9245,75.8267));
+
+        mGoogleMap.addMarker(options4);
+        MarkerOptions options5 = new MarkerOptions()
+                .title("Marker4")
+                .position(new LatLng(26.9245,75.8267));
+
+        mGoogleMap.addMarker(options5);
 
 
     }
@@ -146,9 +149,5 @@ public class navigation_activity extends AppCompatActivity implements OnMapReady
         mGoogleMap.moveCamera(update);
 
 
-
-
-        }
-
-
+    }
 }
