@@ -88,6 +88,7 @@ public class navigation_activity extends AppCompatActivity implements OnMapReady
 
     }
 
+
     private void goToLocation(double lat, double lng) {
 
         LatLng ll = new LatLng(lat,lng);
