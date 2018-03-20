@@ -3,17 +3,20 @@ package com.dexter.tourist.Guide;
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.dexter.tourist.MainTab.BotFragment;
 import com.dexter.tourist.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -31,7 +34,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class navigation_activity extends AppCompatActivity implements OnMapReadyCallback {
 
     GoogleMap mGoogleMap;
-
+    GoogleApiClient mGoogleApiClient;
+    FloatingActionButton fab,fab2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,23 @@ public class navigation_activity extends AppCompatActivity implements OnMapReady
         } else {
             Toast.makeText(this, "Layout Issue", Toast.LENGTH_SHORT).show();
         }
+        fab=(FloatingActionButton)findViewById(R.id.fab);
+        fab2=(FloatingActionButton)findViewById(R.id.fab2);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent chatIntent=new Intent(navigation_activity.this,BotFragment.class);
+                startActivity(chatIntent);
+            }
+        });
+
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void initMap() {
@@ -89,60 +110,48 @@ public class navigation_activity extends AppCompatActivity implements OnMapReady
 
 
         MarkerOptions options = new MarkerOptions()
-                .title("Marker1")
-                .position(new LatLng(26.9239, 75.8267));
-        // .snippet("Helo");
+                                  .title("Marker1")
+                                  .position(new LatLng(26.9239,75.8267));
+                                 // .snippet("Helo");
 
         mGoogleMap.addMarker(options);
 
         MarkerOptions options2 = new MarkerOptions()
-                .title("Marker2")
-                .position(new LatLng(26.9241, 75.8267));
-        //.snippet("Hi");
+                                     .title("Marker2")
+                                     .position(new LatLng(26.9241,75.8267));
+                                        //.snippet("Hi");
 
         mGoogleMap.addMarker(options2);
 
         MarkerOptions options3 = new MarkerOptions()
                 .title("Marker3")
-                .position(new LatLng(26.9243, 75.8267));
+                .position(new LatLng(26.9243,75.8267));
 
         mGoogleMap.addMarker(options3);
         MarkerOptions options4 = new MarkerOptions()
                 .title("Marker4")
-                .position(new LatLng(26.9245, 75.8267));
+                .position(new LatLng(26.9245,75.8267));
 
         mGoogleMap.addMarker(options4);
         MarkerOptions options5 = new MarkerOptions()
                 .title("Marker4")
-                .position(new LatLng(26.9245, 75.8267));
+                .position(new LatLng(26.9245,75.8267));
 
         mGoogleMap.addMarker(options5);
 
-        mGoogleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
-            @Override
-            public View getInfoWindow(Marker marker) {
-                return null;
-            }
-
-            @Override
-            public View getInfoContents(Marker marker) {
-                View v = getLayoutInflater().inflate(R.layout.info_window, null);
-                ImageView i = findViewById(R.id.image1);
-
-                return v;
-            }
-
-            private void goToLocationZoom(double lat, double lng) {
-
-                LatLng ll = new LatLng(lat, lng);
-                CameraUpdate update = CameraUpdateFactory.newLatLng(ll);
-                mGoogleMap.moveCamera(update);
-
-
-            }
-
-
-        });
     }
+
+    private void goToLocationZoom(double lat, double lng) {
+
+        LatLng ll = new LatLng(lat,lng);
+        CameraUpdate update = CameraUpdateFactory.newLatLng(ll);
+        mGoogleMap.moveCamera(update);
+
+
+
+
+    }
+
+
 }
