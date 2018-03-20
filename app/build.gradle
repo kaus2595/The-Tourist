@@ -35,14 +35,11 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:11.8.0'
     compile 'com.google.android.gms:play-services:11.8.0'
 
-<<<<<<< HEAD
-=======
     //chatbot dependencies
     compile 'ai.api:libai:1.6.12'
     compile 'ai.api:sdk:2.0.7@aar'
     compile 'com.google.code.gson:gson:2.3'
     compile 'commons-io:commons-io:2.4'
->>>>>>> 8bbc30873df6afb42626b72541f12b364db9c2c1
     compile 'com.github.karanchuri:PermissionManager:0.1.0'
 }
 
