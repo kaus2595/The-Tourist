@@ -3,17 +3,20 @@ package com.dexter.tourist.Guide;
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.dexter.tourist.MainTab.BotFragment;
 import com.dexter.tourist.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -32,7 +35,7 @@ public class navigation_activity extends AppCompatActivity implements OnMapReady
 
     GoogleMap mGoogleMap;
     GoogleApiClient mGoogleApiClient;
-
+    FloatingActionButton fab,fab2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,23 @@ public class navigation_activity extends AppCompatActivity implements OnMapReady
         } else {
             Toast.makeText(this, "Layout Issue", Toast.LENGTH_SHORT).show();
         }
+        fab=(FloatingActionButton)findViewById(R.id.fab);
+        fab2=(FloatingActionButton)findViewById(R.id.fab2);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent chatIntent=new Intent(navigation_activity.this,BotFragment.class);
+                startActivity(chatIntent);
+            }
+        });
+
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void initMap() {
