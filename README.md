@@ -29,8 +29,11 @@ There are again lots of features which we will add in future:
 ### user
 [<img src="images/Screenshot_2018-03-21-04-51-49-371_com.dexter.tourist.png" align="left" width="180" hspace="5" vspace="10">](images/Screenshot_2018-03-21-04-51-49-371_com.dexter.tourist.png)
 [<img src="images/Screenshot_2018-03-21-04-51-43-200_com.dexter.tourist.png" align="left" width="180" hspace="5" vspace="10">](/images/Screenshot_2018-03-21-04-51-43-200_com.dexter.tourist.png)
-[<img src="/images/Screenshot_2018-03-21-04-51-49-371_com.dexter.tourist.png" align="left" width="180" hspace="5" vspace="10">](/images/Screenshot_2018-03-21-04-51-49-371_com.dexter.tourist.png)
-[<img src="/images/Screenshot_2018-03-21-04-51-52-365_com.dexter.tourist.png" align="left" width="180" hspace="5" vspace="10">](/images/Screenshot_2018-03-21-04-51-52-365_com.dexter.tourist.png)    
+[<img src="images/Screenshot_2018-03-21-04-51-23-604_com.dexter.tourist.png" align="left" width="180" hspace="5" vspace="10">](/images/Screenshot_2018-03-21-04-51-23-604_com.dexter.tourist.png)
+[<img src="/images/Screenshot_2018-03-21-04-51-52-365_com.dexter.tourist.png" align="left" width="180" hspace="5" vspace="10">](/images/Screenshot_2018-03-21-04-51-52-365_com.dexter.tourist.png) 
+
+[<img src="images/QuickMemo%2B_2018-03-21-04-53-16.png" align="left" width="180" hspace="5" vspace="10">](images/QuickMemo%2B_2018-03-21-04-53-16.png)
+
 
 ### admin
 
